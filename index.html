@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jian's Flower | Vlog & Workshops</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Dancing+Script:wght@400;500;600;700&family=Mali:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Jian’s Flower</a>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="#home">Trang Chủ</a></li>
+                    <li><a href="#vlog">Vlog</a></li>
+                    <li><a href="#workshops">Workshop</a></li>
+                    <li><a href="#gallery">Thư Viện Ảnh</a></li>
+                    <li><a href="#" id="navConsultation">Tư Vấn</a></li>
+                    <li><a href="#register">Đăng Ký</a></li>
+                    <li><a href="#contact">Liên Hệ</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Jian’s Flower<br>Nơi Những Bông Hoa Kể Chuyện</h1>
+            <p class="subtitle">Vlog • Workshop Cắm Hoa Sáng Tạo • Cảm Hứng Về Hoa</p>
+            <div class="hero-buttons">
+                <a href="#workshops" class="btn btn-primary">Khám Phá Workshop</a>
+                <a href="#vlog" class="btn btn-secondary">Xem Vlog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 - Latest Vlog -->
+    <section id="vlog" class="section vlog-section">
+        <div class="container">
+            <h2 class="section-title center-text">Vlog Mới Nhất</h2>
+            <div class="vlog-grid">
+                <!-- Vlogs loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 - Upcoming Workshops -->
+    <section id="workshops" class="section workshop-section">
+        <div class="container">
+            <h2 class="section-title center-text">Workshop Sắp Tới</h2>
+            <div class="workshop-grid">
+                <!-- Workshops loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 - Gallery -->
+    <section id="gallery" class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title center-text">Thư Viện Ảnh</h2>
+            <div class="gallery-grid">
+                <!-- Gallery loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 - Consultation CTA -->
+    <section id="consultation" class="section cta-section">
+        <div class="container cta-content">
+            <div class="cta-text">
+                <h2>Bạn Cần Tư Vấn Riêng?</h2>
+                <p>Hãy để lại tin nhắn hoặc kết nối trực tiếp với Jian để được tư vấn về hoa và các khóa học phù hợp nhất với bạn.</p>
+            </div>
+            <div class="center-btn-container">
+                <button id="btnConsultation" class="btn btn-primary">Nhận Tư Vấn</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 - Registration Form -->
+    <section id="register" class="section register-section">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="section-title center-text">Đăng Ký Tham Gia Workshop</h2>
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="fullname">Họ và Tên</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Địa chỉ Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số Điện Thoại</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="participants">Số Lượng Người Tham Gia</label>
+                        <input type="number" id="participants" name="participants" min="1" max="10" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="workshop">Chọn Workshop</label>
+                        <select id="workshop" name="workshop" required>
+                            <option value="" disabled selected>Chọn một tùy chọn...</option>
+                            <option value="bouquet">Bó Hoa Cầm Tay - 15/10</option>
+                            <option value="installation">Nghệ Thuật Sắp Đặt Hoa - 22/10</option>
+                            <option value="wreath">Vòng Nguyệt Quế Lễ Hội - 05/11</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Lời Nhắn (Tùy Chọn)</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">Đăng Ký Ngay</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7 - Testimonials -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <h2 class="section-title center-text">Lời Nhận Xét</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="quote">"Buổi workshop thực sự mang lại cảm giác chữa lành! Tôi đã học được rất nhiều và mang về một tác phẩm tuyệt đẹp."</p>
+                    <p class="author">- Sarah L.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>Jian’s Flower</h3>
+                <p>Nơi thiên nhiên gặp gỡ sự sáng tạo.</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <div class="footer-info">
+                <p>contact@jiansflower.com | <span id="footerPhone">+1 234 567 890</span><span id="footerWebsiteWrap"></span></p>
+                <p>&copy; 2024 Jian’s Flower. Đã đăng ký bản quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Gallery Image">
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-comments"></i> Chat với Admin
+            </div>
+            <button id="closeChat" class="close-chat">&times;</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="message system">
+                Xin chào! Tôi có thể giúp gì cho bạn hôm nay?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Nhập tin nhắn...">
+            <button id="sendChatBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

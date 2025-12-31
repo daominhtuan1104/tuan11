@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin | Jian's Flower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>Jian's Flower</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i> Tổng Quan
+            </li>
+            <li onclick="showSection('registrations')">
+                <i class="fas fa-users"></i> Danh Sách Thành Viên
+            </li>
+            <li onclick="showSection('workshops')">
+                <i class="fas fa-calendar-alt"></i> Quản Lý Workshop
+            </li>
+            <li onclick="showSection('posts')">
+                <i class="fas fa-newspaper"></i> Bài Viết & Vlog
+            </li>
+            <li onclick="showSection('messages')">
+                <i class="fas fa-comments"></i> Tin Nhắn
+            </li>
+            <li onclick="showSection('siteConfig')">
+                <i class="fas fa-gear"></i> Cấu Hình Liên Hệ
+            </li>
+            <li onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="dashboard-header">
+            <h2 id="pageTitle">Tổng Quan</h2>
+            <div class="user-info">
+                <span>Xin chào, Admin</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section-container active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h3>Đăng Ký Mới</h3>
+                        <p id="totalReg">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div>
+                        <h3>Workshop</h3>
+                        <p id="totalWorkshops">3</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-video"></i></div>
+                    <div>
+                        <h3>Vlog</h3>
+                        <p>3</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Đăng Ký Gần Đây</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Số Lượng</th>
+                        <th>Workshop</th>
+                        <th>Ngày Đăng Ký</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody id="recentRegTable">
+                    <!-- Data will be populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Registrations Section -->
+        <div id="registrations" class="section-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3>Danh Sách Thành Viên</h3>
+                <div class="table-controls">
+                    <div style="position:relative;">
+                        <input type="text" id="memberSearch" placeholder="Tìm theo tên, email, SĐT">
+                        <i class="fas fa-search" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); color:#888;"></i>
+                    </div>
+                </div>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Email</th>
+                        <th>Tổng Số Workshop</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTable"></tbody>
+            </table>
+        </div>
+
+        <div id="siteConfig" class="section-container">
+            <h3>Cấu Hình Liên Hệ & Liên Kết</h3>
+            <form id="siteConfigForm">
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>Số Điện Thoại</label>
+                        <input type="text" id="cfgPhone" placeholder="+84 ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="cfgEmail" placeholder="contact@...">
+                    </div>
+                    <div class="form-group">
+                        <label>Youtube</label>
+                        <input type="text" id="cfgYoutube" placeholder="https://youtube.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Facebook</label>
+                        <input type="text" id="cfgFacebook" placeholder="https://facebook.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label>TikTok</label>
+                        <input type="text" id="cfgTiktok" placeholder="https://tiktok.com/@...">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram</label>
+                        <input type="text" id="cfgInstagram" placeholder="https://instagram.com/...">
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px; margin-top:12px;">
+                    <button type="submit" class="btn btn-primary">Lưu Cấu Hình</button>
+                    <button type="button" class="btn btn-secondary" style="color:#333; border:1px solid #ccc;" onclick="resetSiteConfigForm()">Khôi Phục</button>
+                </div>
+            </form>
+            <div id="siteConfigPreview" class="card" style="margin-top:16px; padding:16px;"></div>
+        </div>
+        <!-- Workshops Section -->
+        <div id="workshops" class="section-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Danh Sách Workshop</h3>
+                <button class="btn btn-primary" onclick="openAddModal('workshop')">Thêm Workshop</button>
+            </div>
+            
+            <!-- Calendar Container -->
+            <div id="calendar" style="background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); min-height: 600px;"></div>
+
+            <div class="grid workshop-grid" id="adminWorkshopGrid">
+                <!-- Workshops loaded here -->
+            </div>
+        </div>
+
+        <!-- Posts & Gallery Section -->
+        <div id="posts" class="section-container">
+             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Bài Viết & Vlog</h3>
+                <button class="btn btn-primary" onclick="openAddModal('post')">Thêm Bài Viết Mới</button>
+            </div>
+            <div class="grid vlog-grid" id="adminPostGrid" style="margin-bottom: 40px;">
+                <!-- Posts loaded here -->
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #ddd; margin: 40px 0;">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Thư Viện Ảnh</h3>
+                <button class="btn btn-primary" onclick="openAddModal('gallery')">Thêm Ảnh Mới</button>
+            </div>
+            <div class="gallery-grid" id="adminGalleryGrid">
+                <!-- Gallery loaded here -->
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messages" class="section-container">
+            <h3>Tin Nhắn Khách Hàng</h3>
+            <div class="admin-chat-layout">
+                <div class="chat-sidebar">
+                    <div class="chat-search">
+                        <input type="text" placeholder="Tìm khách hàng...">
+                    </div>
+                    <ul class="chat-user-list" id="chatUserList">
+                        <!-- User list items will be generated here -->
+                        <li class="active">
+                            <div class="user-avatar">K</div>
+                            <div class="user-info">
+                                <h4>Khách vãng lai</h4>
+                                <p>Tin nhắn mới nhất...</p>
+                            </div>
+                        </li>
+                        <!-- Demo item -->
+                        <li>
+                            <div class="user-avatar">A</div>
+                            <div class="user-info">
+                                <h4>Anh Nam</h4>
+                                <p>Cảm ơn shop nhé!</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-main">
+                    <div class="chat-header-info">
+                        <h4 id="currentChatUser">Khách vãng lai</h4>
+                    </div>
+                    <div id="adminChatMessages" class="chat-messages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="adminChatInput" placeholder="Nhập tin nhắn trả lời...">
+                        <button id="adminSendChatBtn" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal for Adding Workshop -->
+    <div id="workshopModal" class="modal">
+        <div class="modal-content">
+            <h3 id="workshopModalLabel">Thêm Workshop Mới</h3>
+            <form id="addWorkshopForm">
+                <input type="hidden" id="editWorkshopIndex" value="-1">
+                <div class="form-group">
+                    <label>Tên Workshop</label>
+                    <input type="text" id="wsName" required>
+                </div>
+                <div class="form-group">
+                    <label>Ngày Tổ Chức</label>
+                    <input type="date" id="wsDateInput" required>
+                </div>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>Giờ Bắt Đầu</label>
+                        <input type="time" id="wsStartTime" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Giờ Kết Thúc</label>
+                        <input type="time" id="wsEndTime" required>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label>Cấp Độ</label>
+                    <input type="text" id="wsLevel" required>
+                </div>
+                <div class="form-group">
+                    <label>Mô Tả Ngắn</label>
+                    <textarea id="wsDesc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Trạng Thái Hiển Thị</label>
+                    <select id="wsVisibility" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="public">Public (Hiển thị trên web)</option>
+                        <option value="private">Private (Chỉ hiển thị trong Admin)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ghi Chú Nội Bộ (Chỉ hiển thị trên lịch Admin)</label>
+                    <textarea id="wsNotes" rows="2" placeholder="Ví dụ: Cần chuẩn bị thêm hoa hồng..."></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('workshopModal')" style="color: #333; border: 1px solid #ccc;">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="regModal" class="modal">
+        <div class="modal-content" style="width: 600px; max-width: 95%;">
+            <h3>Chỉnh Sửa Đăng Ký</h3>
+            <form id="editRegForm">
+                <input type="hidden" id="editRegId" value="">
+                <div class="form-group">
+                    <label>Họ và Tên</label>
+                    <input type="text" id="editRegName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editRegEmail" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Số Điện Thoại</label>
+                    <input type="text" id="editRegPhone" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Workshop Tham Dự</label>
+                    <select id="editRegWorkshop"></select>
+                </div>
+                <div class="form-group">
+                    <label>Ngày Tham Dự</label>
+                    <input type="date" id="editRegAttendDate">
+                </div>
+                <div class="form-group">
+                    <label>Số Lượng</label>
+                    <input type="number" id="editRegParticipants" min="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label>Trạng Thái</label>
+                    <select id="editRegStatus">
+                        <option value="active">Đang tham gia</option>
+                        <option value="cancelled">Huỷ tham gia</option>
+                    </select>
+                </div>
+                <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('regModal')" style="color:#333; border:1px solid #ccc;">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Post -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <h3>Thêm Bài Viết / Vlog Mới</h3>
+            <form id="addPostForm">
+                <input type="hidden" id="editPostIndex" value="-1">
+                <div class="form-group">
+                    <label>Tiêu Đề</label>
+                    <input type="text" id="postTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Mô Tả Ngắn</label>
+                    <textarea id="postDesc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Link Ảnh (URL)</label>
+                    <input type="text" id="postImage" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Tải Ảnh Từ Máy</label>
+                    <input type="file" id="postImageFile" accept="image/*">
+                </div>
+                <div style="margin-top: 8px;">
+                    <button type="button" class="btn btn-outline" onclick="openMediaLibrary('postImage')">Chọn từ Thư Viện</button>
+                </div>
+                <div class="form-group">
+                    <label>Link Video / Bài Viết</label>
+                    <input type="text" id="postLink" placeholder="#" required>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('postModal')" style="color: #333; border: 1px solid #ccc;">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Gallery Image -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-content">
+            <h3>Thêm Ảnh Vào Thư Viện</h3>
+            <form id="addGalleryForm">
+                <input type="hidden" id="editGalleryIndex" value="-1">
+                <div class="form-group">
+                    <label>Link Ảnh (URL)</label>
+                    <input type="text" id="galleryImage" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Tải Ảnh Từ Máy</label>
+                    <input type="file" id="galleryFile" accept="image/*">
+                </div>
+                <div style="margin-top: 8px;">
+                    <button type="button" class="btn btn-outline" onclick="openMediaLibrary('galleryImage')">Chọn từ Thư Viện</button>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('galleryModal')" style="color: #333; border: 1px solid #ccc;">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="mediaModal" class="modal">
+        <div class="modal-content" style="width: 900px; max-width: 95%;">
+            <h3>Thư Viện Media</h3>
+            <div class="media-tabs">
+                <button class="media-tab active" onclick="switchMediaTab('library')">Thư Viện</button>
+                <button class="media-tab" onclick="switchMediaTab('upload')">Tải Lên</button>
+            </div>
+            <div id="mediaLibraryPanel">
+                <div class="media-controls">
+                    <input type="text" id="mediaSearch" placeholder="Tìm kiếm...">
+                    <select id="mediaFilter">
+                        <option value="all">Tất cả</option>
+                        <option value="posts">Ảnh Bài Viết</option>
+                        <option value="gallery">Ảnh Thư Viện</option>
+                    </select>
+                </div>
+                <div id="mediaGrid" class="media-grid"></div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="confirmMediaSelection()">Chọn</button>
+                    <button class="btn btn-secondary" onclick="closeModal('mediaModal')" style="color: #333; border: 1px solid #ccc;">Đóng</button>
+                </div>
+            </div>
+            <div id="mediaUploadPanel" style="display: none;">
+                <div class="form-group">
+                    <label>Chọn File Ảnh</label>
+                    <input type="file" id="mediaUploadFile" accept="image/*">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="uploadMediaFile()">Tải Lên</button>
+                    <button class="btn btn-secondary" onclick="closeModal('mediaModal')" style="color: #333; border: 1px solid #ccc;">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <div id="notifyOverlay" class="notify-overlay">
+        <div class="notify-card">
+            <div class="notify-content">
+                <span class="notify-icon">✔</span>
+                <span id="notifyText"></span>
+            </div>
+        </div>
+    </div>
+    <div id="confirmOverlay" class="notify-overlay">
+        <div class="confirm-card">
+            <div class="notify-content">
+                <span class="notify-icon">?</span>
+                <span id="confirmText"></span>
+            </div>
+            <div class="confirm-actions">
+                <button id="confirmCancel" class="btn btn-secondary" style="color:#333; border:1px solid #ccc;">Huỷ</button>
+                <button id="confirmOk" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

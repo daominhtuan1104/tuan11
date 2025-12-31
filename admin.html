@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin | Jian's Flower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Jian's Flower</h2>
+                <p>Quản Lý Hệ Thống</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Đăng Nhập</button>
+            </form>
+            <p id="loginMessage" class="message"></p>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
